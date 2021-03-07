@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{20782707-1F99-4018-9EAF-5E131A4BF64C}</ProjectGuid>
+    <ProjectGuid>{1921CB61-F7AD-4223-AD93-C1234F75D608}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ValheimMod</RootNamespace>
-    <AssemblyName>ValheimMod</AssemblyName>
+    <RootNamespace>ValheimConfigAndDebugging</RootNamespace>
+    <AssemblyName>ValheimConfigAndDebugging</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -56,7 +56,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ValheimMod.cs" />
+    <Compile Include="ValheimConfigAndDebugging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
