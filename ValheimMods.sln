@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValheimConfigAndDebugging",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextSizeChangeExample", "TextSizeChangeExample\TextSizeChangeExample.csproj", "{3AB72F94-B886-4C05-AF18-789D75FB5F32}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamplePingShips", "ExamplePingShips\ExamplePingShips.csproj", "{7954C395-EBD7-4B6F-A3EC-CAB92E375D98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{3AB72F94-B886-4C05-AF18-789D75FB5F32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AB72F94-B886-4C05-AF18-789D75FB5F32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AB72F94-B886-4C05-AF18-789D75FB5F32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7954C395-EBD7-4B6F-A3EC-CAB92E375D98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7954C395-EBD7-4B6F-A3EC-CAB92E375D98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7954C395-EBD7-4B6F-A3EC-CAB92E375D98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7954C395-EBD7-4B6F-A3EC-CAB92E375D98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,6 +46,7 @@ Global
 		{20782707-1F99-4018-9EAF-5E131A4BF64C} = {FE37E94B-9ECD-4E3F-8C4E-7C7A739FC8D0}
 		{1921CB61-F7AD-4223-AD93-C1234F75D608} = {FE37E94B-9ECD-4E3F-8C4E-7C7A739FC8D0}
 		{3AB72F94-B886-4C05-AF18-789D75FB5F32} = {FE37E94B-9ECD-4E3F-8C4E-7C7A739FC8D0}
+		{7954C395-EBD7-4B6F-A3EC-CAB92E375D98} = {FE37E94B-9ECD-4E3F-8C4E-7C7A739FC8D0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {140AF47E-9ABD-4B1D-B3F0-E00223FE5F41}
