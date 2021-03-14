@@ -1,0 +1,19 @@
+﻿{
+  "recipes": [
+    {
+      "name": "Recipe_GrapplingHook",
+      "item": "GrapplingHook",
+      "amount": 1,
+      "craftingStation": "piece_workbench",
+      "minStationLevel": 1,
+      "enabled": true,
+      "repairStation": "piece_workbench",
+      "resources": [
+        {
+          "item": "DeerHide",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}
