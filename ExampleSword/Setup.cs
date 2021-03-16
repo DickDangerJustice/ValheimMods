@@ -2,6 +2,7 @@
 using HarmonyLib;
 using System.Linq;
 using System.Reflection;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ExampleSword
@@ -83,6 +84,8 @@ namespace ExampleSword
                 if (ObjectDB.instance.GetItemPrefab(ExampleSword.name.GetStableHashCode()) == null)
                 {
                     ObjectDB.instance.m_items.Add(ExampleSword);
+                    Dictionary<int, GameObject> m_itemsByHash = (Dictionary<int, GameObject>) typeof(ObjectDB).GetField("m_itemByHash", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(ObjectDB.instance);
+                    m_itemsByHash[ExampleSword.name.GetStableHashCode()] = ExampleSword;
                 }
             }
         }
