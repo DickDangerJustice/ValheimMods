@@ -10,15 +10,15 @@ namespace GrapplingHook
 	class SE_Grappled : StatusEffect
 	{
 		[Header("SE_Grappled")]
-		public float m_minForce = 2f;
+		public float m_minForce = 20f;
 
-		public float m_maxForce = 10f;
+		public float m_maxForce = 30f;
 
-		public float m_minDistance = 6f;
+		public float m_minDistance = 5f;
 
 		public float m_maxDistance = 30f;
 
-		public float m_staminaDrain = 10f;
+		public float m_staminaDrain = 0.1f;
 
 		public float m_staminaDrainInterval = 0.1f;
 
@@ -73,7 +73,7 @@ namespace GrapplingHook
 			{
 				return;
 			}
-			Vector3 vector = m_attacker.transform.position - m_character.transform.position;
+			Vector3 vector = m_character.transform.position - m_attacker.transform.position;
 			Vector3 normalized = vector.normalized;
 			float radius = m_character.GetRadius();
 			float magnitude = vector.magnitude;
@@ -88,7 +88,7 @@ namespace GrapplingHook
 				normalized.Normalize();
 				if (m_character.GetStandingOnShip() == null && !m_character.IsAttached())
 				{
-					component.AddForce(normalized * num4, ForceMode.VelocityChange);
+					m_attacker.GetComponent<Rigidbody>().AddForce(normalized * num4, ForceMode.VelocityChange);
 				}
 				m_drainStaminaTimer += dt;
 				if (m_drainStaminaTimer > m_staminaDrainInterval)
@@ -127,6 +127,10 @@ namespace GrapplingHook
 			if (m_time > 2f && (m_attacker.IsBlocking() || m_attacker.InAttack()))
 			{
 				m_attacker.Message(MessageHud.MessageType.Center, m_character.m_name + " released");
+				return true;
+			}
+			if ((m_character.transform.position - m_attacker.transform.position).magnitude < m_minDistance)
+			{
 				return true;
 			}
 			return false;

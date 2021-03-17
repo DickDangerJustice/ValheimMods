@@ -8,7 +8,7 @@ namespace GrapplingHook
     {
         public static bool Prefix(ZNetScene __instance)
         {
-            GrapplingHook.TryRegisterPrefabs(__instance);
+            Setup.TryRegisterPrefabs(__instance);
             return true;
         }
     }

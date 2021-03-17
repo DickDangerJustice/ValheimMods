@@ -11,7 +11,7 @@ using UnityEngine;
 namespace GrapplingHook
 {
     [BepInPlugin("dickdangerjustice.GrapplingHook", "Grappling Hook", "1.0.0")]
-    public class GrapplingHook : BaseUnityPlugin
+    public class Setup : BaseUnityPlugin
     {
         private Harmony _harmony;
         public static RecipesConfig Recipes;
@@ -28,11 +28,15 @@ namespace GrapplingHook
             var grapplingHook = assetBundle.LoadAsset<GameObject>("assets/customitems/grapplinghook/grapplinghook.prefab");
 
             var grapplingHookItemDrop = grapplingHook.GetComponent<ItemDrop>();
-            var grappled = assetBundle.LoadAsset<StatusEffect>("assets/customitems/grapplinghook/grappled.asset");
-
-            grapplingHookItemDrop.m_itemData.m_shared.m_attackStatusEffect = grappled;
-            Prefabs.Add("GrapplingHook", grapplingHook);
+            var grappled = ScriptableObject.CreateInstance(typeof(SE_Grappled)) as SE_Grappled;
+            grappled.name = "Grappled";
             StatusEffects.Add(grappled);
+            grapplingHookItemDrop.m_itemData.m_shared.m_attackStatusEffect = grappled;
+            //var grappled = assetBundle.LoadAsset<StatusEffect>("assets/customitems/grapplinghook/grappled.asset");
+
+            //grapplingHookItemDrop.m_itemData.m_shared.m_attackStatusEffect = grappled;
+            Prefabs.Add("GrapplingHook", grapplingHook);
+            //StatusEffects.Add(grappled);
 
             //var assetBundle = GetAssetBundleFromResources("custom_item_grappling_hook");
             //var prefab = assetBundle.LoadAsset<GameObject>("assets/prefabinstance/queensjam.prefab");
@@ -99,7 +103,7 @@ namespace GrapplingHook
             var assetFileName = Path.Combine(Paths.PluginPath, "GrapplingHook", assetName);
             if (!File.Exists(assetFileName))
             {
-                Assembly assembly = typeof(GrapplingHook).Assembly;
+                Assembly assembly = typeof(Setup).Assembly;
                 assetFileName = Path.Combine(Path.GetDirectoryName(assembly.Location), assetName);
                 if (!File.Exists(assetFileName))
                 {
@@ -166,6 +170,8 @@ namespace GrapplingHook
                     if (ObjectDB.instance.GetItemPrefab(prefab.name.GetStableHashCode()) == null)
                     {
                         ObjectDB.instance.m_items.Add(prefab);
+                        Dictionary<int, GameObject> m_itemsByHash = (Dictionary<int, GameObject>)typeof(ObjectDB).GetField("m_itemByHash", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(ObjectDB.instance);
+                        m_itemsByHash[prefab.name.GetStableHashCode()] = prefab;
                     }
                 }
             }
