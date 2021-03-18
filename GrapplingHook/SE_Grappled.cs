@@ -15,7 +15,7 @@ namespace GrapplingHook
 
 		public float m_maxForce = 30f;
 
-		public float m_minDistance = 5f;
+		public float m_minDistance = 4f;
 
 		public float m_maxDistance = 30f;
 
@@ -128,17 +128,21 @@ namespace GrapplingHook
 			{
 				return true;
 			}
-			if (m_time > 2f && (m_attacker.IsBlocking() || m_attacker.InAttack()))
+			//if (m_time > 2f && (m_attacker.IsBlocking() || m_attacker.InAttack()))
+			if (m_time > 2f && (m_attacker.IsBlocking()))
 			{
 				m_attacker.Message(MessageHud.MessageType.Center, m_character.m_name + " released");
 				return true;
 			}
-			if ((m_character.transform.position - m_attacker.transform.position).magnitude < m_minDistance)
+			if ((m_character.transform.position - m_attacker.transform.position).magnitude < m_minDistance + 2)
 			{
-				var mBody = AccessTools.Field(typeof(Character), "m_body").GetValue(m_attacker) as Rigidbody;
-				mBody.velocity = Vector3.zero;
-				return true;
-			}
+                var mBody = AccessTools.Field(typeof(Character), "m_body").GetValue(m_attacker) as Rigidbody;
+                mBody.velocity = Vector3.zero;
+                m_attacker.transform.position = m_character.transform.position - m_character.transform.forward * 2;
+				//m_attacker.transform.position += new Vector3(0, m_character.GetComponent<MeshFilter>().mesh.bounds.extents.y * 3/4);
+                m_attacker.transform.position += new Vector3(0, m_character.transform.lossyScale.y * 1.5f);
+                //return true;
+            }
 			return false;
 		}
 	}
