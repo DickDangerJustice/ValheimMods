@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HarmonyLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -84,7 +85,10 @@ namespace GrapplingHook
 			float num4 = num2 * num3;
 			if (magnitude - radius > m_minDistance && num < num4)
 			{
-				normalized.y = 0f;
+				//if (Math.Abs(m_character.transform.position.y - m_attacker.transform.position.y) < 0.1)
+    //            {
+				//	normalized.y = 0f;
+				//}
 				normalized.Normalize();
 				if (m_character.GetStandingOnShip() == null && !m_character.IsAttached())
 				{
@@ -131,6 +135,8 @@ namespace GrapplingHook
 			}
 			if ((m_character.transform.position - m_attacker.transform.position).magnitude < m_minDistance)
 			{
+				var mBody = AccessTools.Field(typeof(Character), "m_body").GetValue(m_attacker) as Rigidbody;
+				mBody.velocity = Vector3.zero;
 				return true;
 			}
 			return false;

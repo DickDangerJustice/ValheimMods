@@ -84,7 +84,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Patches\Character_Patch.cs" />
     <Compile Include="Patches\Player_Patch.cs" />
     <Compile Include="Mod.cs" />
     <Compile Include="Patches\Harpooned_Patch.cs" />
