@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using BepInEx;
+using BepInEx.Configuration;
 using Common;
 using HarmonyLib;
 using LitJson;
@@ -11,17 +12,20 @@ using UnityEngine;
 namespace GrapplingHook
 {
     [BepInPlugin("dickdangerjustice.GrapplingHook", "Grappling Hook", "1.0.0")]
-    public class Setup : BaseUnityPlugin
+    public class Mod : BaseUnityPlugin
     {
         private Harmony _harmony;
         public static RecipesConfig Recipes;
         public static readonly Dictionary<string, GameObject> Prefabs = new Dictionary<string, GameObject>();
         public static readonly List<StatusEffect> StatusEffects = new List<StatusEffect>();
+        public static ConfigEntry<string> GrapplingHookHotkey;
 
         private void Awake()
         {
             Debug.Log("GRAPPLING HOOK AWAKE");
-            
+
+            GrapplingHookHotkey = Config.Bind<string>("General", "GrapplingHookHotkey", "Z", "Grappling Hook Hotkey");
+
             Recipes = LoadJsonFile<RecipesConfig>("recipes.json");
             //var assetBundle = LoadAssetBundle("custom_item_grappling_hook");
             var assetBundle = GetAssetBundleFromResources("grapplinghook");
@@ -103,7 +107,7 @@ namespace GrapplingHook
             var assetFileName = Path.Combine(Paths.PluginPath, "GrapplingHook", assetName);
             if (!File.Exists(assetFileName))
             {
-                Assembly assembly = typeof(Setup).Assembly;
+                Assembly assembly = typeof(Mod).Assembly;
                 assetFileName = Path.Combine(Path.GetDirectoryName(assembly.Location), assetName);
                 if (!File.Exists(assetFileName))
                 {

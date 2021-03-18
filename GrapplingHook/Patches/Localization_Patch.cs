@@ -13,7 +13,7 @@ namespace GrapplingHook
     {
         public static void Postfix(Localization __instance)
         {
-            var addWord = typeof(Localization).GetMethod("AddWord", BindingFlags.NonPublic | BindingFlags.Instance);
+            var addWord = AccessTools.Method(typeof(Localization), "AddWord");
             addWord.Invoke(__instance, new object[] { "item_grappling_hook", "Grappling Hook" });
             addWord.Invoke(__instance, new object[] { "se_grappled_name", "Grappled" });
         }

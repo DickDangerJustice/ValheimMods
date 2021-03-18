@@ -18,7 +18,7 @@ namespace GrapplingHook
 
 		public float m_maxDistance = 30f;
 
-		public float m_staminaDrain = 0.1f;
+		public float m_staminaDrain = 0f;
 
 		public float m_staminaDrainInterval = 0.1f;
 

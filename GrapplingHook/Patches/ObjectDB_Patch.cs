@@ -8,9 +8,9 @@ namespace GrapplingHook
     {
         public static void Postfix()
         {
-            Setup.TryRegisterStatusEffects();
-            Setup.TryRegisterItems();
-            Setup.TryRegisterRecipes();
+            Mod.TryRegisterStatusEffects();
+            Mod.TryRegisterItems();
+            Mod.TryRegisterRecipes();
         }
     }
 
@@ -19,9 +19,9 @@ namespace GrapplingHook
     {
         public static void Postfix()
         {
-            Setup.TryRegisterStatusEffects();
-            Setup.TryRegisterItems();
-            Setup.TryRegisterRecipes();
+            Mod.TryRegisterStatusEffects();
+            Mod.TryRegisterItems();
+            Mod.TryRegisterRecipes();
         }
     }
 }
