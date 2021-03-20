@@ -20,6 +20,8 @@ namespace GrapplingHook
         public static readonly List<StatusEffect> StatusEffects = new List<StatusEffect>();
         public static ConfigEntry<string> GrapplingHookHotkey;
 
+        public static bool WasGrappled;
+
         private void Awake()
         {
             Debug.Log("GRAPPLING HOOK AWAKE");

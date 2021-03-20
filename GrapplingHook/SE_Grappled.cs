@@ -11,15 +11,15 @@ namespace GrapplingHook
 	class SE_Grappled : StatusEffect
 	{
 		[Header("SE_Grappled")]
-		public float m_minForce = 20f;
+		public float m_minForce = 50f;
 
-		public float m_maxForce = 30f;
+		public float m_maxForce = 50f;
 
 		public float m_minDistance = 4f;
 
 		public float m_maxDistance = 30f;
 
-		public float m_staminaDrain = 0f;
+		public float m_staminaDrain = 0.1f;
 
 		public float m_staminaDrainInterval = 0.1f;
 
@@ -90,17 +90,18 @@ namespace GrapplingHook
 				//	normalized.y = 0f;
 				//}
 				normalized.Normalize();
-				if (m_character.GetStandingOnShip() == null && !m_character.IsAttached())
-				{
-					m_attacker.GetComponent<Rigidbody>().AddForce(normalized * num4, ForceMode.VelocityChange);
-				}
-				m_drainStaminaTimer += dt;
-				if (m_drainStaminaTimer > m_staminaDrainInterval)
-				{
-					m_drainStaminaTimer = 0f;
-					float num5 = 1f - Mathf.Clamp01(num / num2);
-					m_attacker.UseStamina(m_staminaDrain * num5);
-				}
+				m_attacker.GetComponent<Rigidbody>().AddForce(normalized * num4, ForceMode.VelocityChange);
+				//if (m_character.GetStandingOnShip() == null && !m_character.IsAttached())
+				//{
+				//	m_attacker.GetComponent<Rigidbody>().AddForce(normalized * num4, ForceMode.VelocityChange);
+				//}
+				//m_drainStaminaTimer += dt;
+				//if (m_drainStaminaTimer > m_staminaDrainInterval)
+				//{
+				//	m_drainStaminaTimer = 0f;
+				//	float num5 = 1f - Mathf.Clamp01(num / num2);
+				//	m_attacker.UseStamina(m_staminaDrain * num5);
+				//}
 			}
 			if (magnitude > m_maxDistance)
 			{
@@ -111,6 +112,31 @@ namespace GrapplingHook
 			{
 				m_broken = true;
 				m_attacker.Message(MessageHud.MessageType.Center, m_character.m_name + " escaped");
+			}
+			if ((m_character.transform.position - m_attacker.transform.position).magnitude < m_minDistance + 2)
+			{
+				// stick to target
+				var mBody = AccessTools.Field(typeof(Character), "m_body").GetValue(m_attacker) as Rigidbody;
+				mBody.velocity = Vector3.zero;
+				m_attacker.transform.position = m_character.transform.position - m_character.transform.forward * 2;
+				//m_attacker.transform.position += new Vector3(0, m_character.GetComponent<MeshFilter>().mesh.bounds.extents.y * 3/4);
+				m_attacker.transform.position += new Vector3(0, m_character.transform.lossyScale.y * 1.5f);
+
+				// drain stamina
+				m_drainStaminaTimer += dt;
+				if (m_drainStaminaTimer > m_staminaDrainInterval)
+				{
+					m_drainStaminaTimer = 0f;
+					float num5 = 1f - Mathf.Clamp01(num / num2);
+					m_attacker.UseStamina(m_staminaDrain * num5);
+				}
+
+				// toggle grappled flag if not active
+				if (!Mod.WasGrappled)
+                {
+					Debug.Log("Target grabbed");
+					Mod.WasGrappled = true;
+                }
 			}
 		}
 
@@ -134,15 +160,6 @@ namespace GrapplingHook
 				m_attacker.Message(MessageHud.MessageType.Center, m_character.m_name + " released");
 				return true;
 			}
-			if ((m_character.transform.position - m_attacker.transform.position).magnitude < m_minDistance + 2)
-			{
-                var mBody = AccessTools.Field(typeof(Character), "m_body").GetValue(m_attacker) as Rigidbody;
-                mBody.velocity = Vector3.zero;
-                m_attacker.transform.position = m_character.transform.position - m_character.transform.forward * 2;
-				//m_attacker.transform.position += new Vector3(0, m_character.GetComponent<MeshFilter>().mesh.bounds.extents.y * 3/4);
-                m_attacker.transform.position += new Vector3(0, m_character.transform.lossyScale.y * 1.5f);
-                //return true;
-            }
 			return false;
 		}
 	}

@@ -84,9 +84,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Patches\Character_Patch.cs" />
     <Compile Include="Patches\Player_Patch.cs" />
     <Compile Include="Mod.cs" />
-    <Compile Include="Patches\Harpooned_Patch.cs" />
     <Compile Include="Patches\Localization_Patch.cs" />
     <Compile Include="Patches\ObjectDB_Patch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
