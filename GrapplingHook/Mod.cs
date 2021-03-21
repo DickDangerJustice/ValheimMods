@@ -23,6 +23,7 @@ namespace GrapplingHook
         // Config
         public static ConfigEntry<string> GrapplingHookHotkey;
         public static ConfigEntry<float> HorizontalPosition;
+        public static ConfigEntry<bool> KeepCameraAligned;
         public static ConfigEntry<bool> UseExperimentalFallDamageCancel;
 
         // Static vars
@@ -52,7 +53,8 @@ namespace GrapplingHook
             GrapplingHookHotkey = Config.Bind("General", "GrapplingHookHotkey", "G", "Grappling Hook Hotkey");
             UpdateGrapplingHookKeyCode();
             GrapplingHookHotkey.SettingChanged += HandleGrapplingHookHotkeyChange;
-            HorizontalPosition = Config.Bind("General", "HorizontalPosition", -1.8f, "Horizontal Position");
+            HorizontalPosition = Config.Bind("General", "HorizontalPosition", 1.8f, "Horizontal Position");
+            KeepCameraAligned = Config.Bind("General", "KeepCameraAligned", true, "Keep Camera Aligned");
             UseExperimentalFallDamageCancel = Config.Bind("General", "UseExperimentalFallDamageCancel", false, "Use Experimental Fall Damage Cancel");
 
             Recipes = LoadJsonFile<RecipesConfig>("recipes.json");

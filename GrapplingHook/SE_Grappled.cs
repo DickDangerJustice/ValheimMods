@@ -31,6 +31,8 @@ namespace GrapplingHook
 
 		private float m_drainStaminaTimer;
 
+		private bool IsFirstAlignmentComplete = false;
+
 		public override void Setup(Character character)
 		{
 			base.Setup(character);
@@ -98,13 +100,20 @@ namespace GrapplingHook
 				m_broken = true;
 				m_attacker.Message(MessageHud.MessageType.Center, m_character.m_name + " escaped");
 			}
-			if ((m_character.transform.position - m_attacker.transform.position).magnitude < m_minDistance + 2)
+			if ((m_character.transform.position - m_attacker.transform.position).magnitude < m_minDistance + 4)
 			{
 				// stick to target
 				var mBody = AccessTools.Field(typeof(Character), "m_body").GetValue(m_attacker) as Rigidbody;
 				mBody.velocity = Vector3.zero;
 				var centerPoint = m_character.GetCenterPoint();
 				m_attacker.transform.position = centerPoint - m_character.transform.forward * (m_character.GetCollider().bounds.extents.z + Mod.HorizontalPosition.Value) + new Vector3(0, m_character.GetCollider().bounds.extents.y / 2 - m_attacker.GetCollider().bounds.size.y);
+
+				// align look direction on initial stick
+				if (Mod.KeepCameraAligned.Value || !IsFirstAlignmentComplete)
+                {
+					m_attacker.SetLookDir(m_character.transform.forward);
+					IsFirstAlignmentComplete = true;
+				}
 
                 // drain stamina
                 m_drainStaminaTimer += dt;
