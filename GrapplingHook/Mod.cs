@@ -23,7 +23,7 @@ namespace GrapplingHook
         // Config
         public static ConfigEntry<string> GrapplingHookHotkey;
         public static ConfigEntry<float> HorizontalPosition;
-        public static ConfigEntry<float> VerticalPosition;
+        public static ConfigEntry<bool> UseExperimentalFallDamageCancel;
 
         // Static vars
         public static bool EnableSoftLanding;
@@ -49,11 +49,11 @@ namespace GrapplingHook
         {
             Debug.Log("GRAPPLING HOOK AWAKE");
 
-            GrapplingHookHotkey = Config.Bind<string>("General", "GrapplingHookHotkey", "G", "Grappling Hook Hotkey");
+            GrapplingHookHotkey = Config.Bind("General", "GrapplingHookHotkey", "G", "Grappling Hook Hotkey");
             UpdateGrapplingHookKeyCode();
             GrapplingHookHotkey.SettingChanged += HandleGrapplingHookHotkeyChange;
-            HorizontalPosition = Config.Bind<float>("General", "HorizontalPosition", -1.8f, "Horizontal Position");
-            VerticalPosition = Config.Bind<float>("General", "VerticalPosition", -0.5f, "Vertical Position");
+            HorizontalPosition = Config.Bind("General", "HorizontalPosition", -1.8f, "Horizontal Position");
+            UseExperimentalFallDamageCancel = Config.Bind("General", "UseExperimentalFallDamageCancel", false, "Use Experimental Fall Damage Cancel");
 
             Recipes = LoadJsonFile<RecipesConfig>("recipes.json");
             var assetBundle = GetAssetBundleFromResources("grapplinghook");
@@ -166,7 +166,7 @@ namespace GrapplingHook
 
         public static void TryRegisterItems()
         {
-            if (ObjectDB.instance == null || ObjectDB.instance.m_items.Count == 0)
+            if (ObjectDB.instance == null || ObjectDB.instance.m_items.Count == 0 || ObjectDB.instance.GetItemPrefab("Amber") == null)
             {
                 return;
             }

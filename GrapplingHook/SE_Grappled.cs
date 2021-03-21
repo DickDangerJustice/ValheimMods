@@ -17,7 +17,7 @@ namespace GrapplingHook
 
 		public float m_minDistance = 4f;
 
-		public float m_maxDistance = 30f;
+		public float m_maxDistance = 100f;
 
 		public float m_staminaDrain = 0.1f;
 
@@ -104,7 +104,7 @@ namespace GrapplingHook
 				var mBody = AccessTools.Field(typeof(Character), "m_body").GetValue(m_attacker) as Rigidbody;
 				mBody.velocity = Vector3.zero;
 				var centerPoint = m_character.GetCenterPoint();
-				m_attacker.transform.position = centerPoint + m_character.transform.forward * Mod.HorizontalPosition.Value + new Vector3(0, Mod.VerticalPosition.Value);
+				m_attacker.transform.position = centerPoint - m_character.transform.forward * (m_character.GetCollider().bounds.extents.z + Mod.HorizontalPosition.Value) + new Vector3(0, m_character.GetCollider().bounds.extents.y / 2 - m_attacker.GetCollider().bounds.size.y);
 
                 // drain stamina
                 m_drainStaminaTimer += dt;
@@ -127,7 +127,7 @@ namespace GrapplingHook
 				m_character.GetBaseAI().Alert();
 
 				// enable soft landing for player on next drop
-				if (!Mod.EnableSoftLanding)
+				if (Mod.UseExperimentalFallDamageCancel.Value && !Mod.EnableSoftLanding)
                 {
 					Debug.Log("Soft landing enabled");
 					Mod.EnableSoftLanding = true;

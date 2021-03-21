@@ -10,12 +10,12 @@ namespace GrapplingHook.Patches
         [HarmonyPatch(typeof(Player), "Update")]
         static class Player_Update_Patch
         {
-            static void Postfix(Player __instance, ref Attack ___m_currentAttack, ref float ___m_lastCombatTimer, Rigidbody ___m_body, ZSyncAnimation ___m_zanim, CharacterAnimEvent ___m_animEvent, VisEquipment ___m_visEquipment, Attack ___m_previousAttack, float ___m_timeSinceLastAttack, Inventory ___m_inventory)
+            static void Postfix(Player __instance, ref Attack ___m_currentAttack, ref float ___m_lastCombatTimer, Rigidbody ___m_body, ZSyncAnimation ___m_zanim, CharacterAnimEvent ___m_animEvent, VisEquipment ___m_visEquipment, Attack ___m_previousAttack, float ___m_timeSinceLastAttack)
             {
                 // set configuration variable to allow different key options
                 if (Input.GetKeyDown(Mod.GrapplingHookKeyCode))
                 {
-                    var grapplingHook = ___m_inventory.GetAllItems().First(v => v.m_shared.m_name == "$item_grappling_hook");
+                    var grapplingHook = __instance.GetInventory().GetAllItems().FirstOrDefault(v => v.m_shared.m_name == "$item_grappling_hook");
                     
                     if (grapplingHook == null) return;
 
