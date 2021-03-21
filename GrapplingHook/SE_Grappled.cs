@@ -118,9 +118,10 @@ namespace GrapplingHook
 				// stick to target
 				var mBody = AccessTools.Field(typeof(Character), "m_body").GetValue(m_attacker) as Rigidbody;
 				mBody.velocity = Vector3.zero;
-				m_attacker.transform.position = m_character.transform.position - m_character.transform.forward * 2;
+				var centerPoint = m_character.GetCenterPoint();
+				m_attacker.transform.position = centerPoint - m_character.transform.forward * (Mod.MountDistance.Value);
 				//m_attacker.transform.position += new Vector3(0, m_character.GetComponent<MeshFilter>().mesh.bounds.extents.y * 3/4);
-				m_attacker.transform.position += new Vector3(0, m_character.transform.lossyScale.y * 1.5f);
+				//m_attacker.transform.position += new Vector3(0, m_character.transform.lossyScale.y * 1.5f);				
 
 				// drain stamina
 				m_drainStaminaTimer += dt;

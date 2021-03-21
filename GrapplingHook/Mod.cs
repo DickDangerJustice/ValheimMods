@@ -18,8 +18,12 @@ namespace GrapplingHook
         public static RecipesConfig Recipes;
         public static readonly Dictionary<string, GameObject> Prefabs = new Dictionary<string, GameObject>();
         public static readonly List<StatusEffect> StatusEffects = new List<StatusEffect>();
-        public static ConfigEntry<string> GrapplingHookHotkey;
 
+        // Config
+        public static ConfigEntry<string> GrapplingHookHotkey;
+        public static ConfigEntry<float> MountDistance;
+
+        // Static vars
         public static bool WasGrappled;
 
         private void Awake()
@@ -27,6 +31,7 @@ namespace GrapplingHook
             Debug.Log("GRAPPLING HOOK AWAKE");
 
             GrapplingHookHotkey = Config.Bind<string>("General", "GrapplingHookHotkey", "Z", "Grappling Hook Hotkey");
+            MountDistance = Config.Bind<float>("General", "MountDistance", 1.5f, "Mount Distance");
 
             Recipes = LoadJsonFile<RecipesConfig>("recipes.json");
             //var assetBundle = LoadAssetBundle("custom_item_grappling_hook");
