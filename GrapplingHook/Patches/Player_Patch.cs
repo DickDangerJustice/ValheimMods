@@ -21,20 +21,14 @@ namespace GrapplingHook.Patches
                 
                 if (Input.GetKeyDown(grapplingHookHotkey))
                 {
-                    Debug.Log("test");
-                    //AccessTools.Method(typeof(Player), "PlayerAttackInput").Invoke(__instance, new object[] { Time.fixedDeltaTime });
-
                     var grapplingHook = ___m_inventory.GetAllItems().First(v => v.m_shared.m_name == "$item_grappling_hook");
                     
                     if (grapplingHook == null) return;
 
-                    Debug.Log(grapplingHook);
-                    //var currentWeapon = __instance.GetCurrentWeapon(); 
                     var attack = grapplingHook.m_shared.m_attack.Clone();
                     attack.Start(__instance, ___m_body, ___m_zanim, ___m_animEvent, ___m_visEquipment, grapplingHook, ___m_previousAttack, ___m_timeSinceLastAttack, __instance.GetAttackDrawPercentage());
                     ___m_currentAttack = attack;
                     ___m_lastCombatTimer = 0f;
-                    //AccessTools.Method(typeof(Attack), "ProjectileAttackTriggered").Invoke(attack, new object[] { });
                 }
             }
         }

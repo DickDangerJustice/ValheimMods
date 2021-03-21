@@ -85,23 +85,8 @@ namespace GrapplingHook
 			float num4 = num2 * num3;
 			if (magnitude - radius > m_minDistance && num < num4)
 			{
-				//if (Math.Abs(m_character.transform.position.y - m_attacker.transform.position.y) < 0.1)
-    //            {
-				//	normalized.y = 0f;
-				//}
 				normalized.Normalize();
 				m_attacker.GetComponent<Rigidbody>().AddForce(normalized * num4, ForceMode.VelocityChange);
-				//if (m_character.GetStandingOnShip() == null && !m_character.IsAttached())
-				//{
-				//	m_attacker.GetComponent<Rigidbody>().AddForce(normalized * num4, ForceMode.VelocityChange);
-				//}
-				//m_drainStaminaTimer += dt;
-				//if (m_drainStaminaTimer > m_staminaDrainInterval)
-				//{
-				//	m_drainStaminaTimer = 0f;
-				//	float num5 = 1f - Mathf.Clamp01(num / num2);
-				//	m_attacker.UseStamina(m_staminaDrain * num5);
-				//}
 			}
 			if (magnitude > m_maxDistance)
 			{
@@ -120,8 +105,6 @@ namespace GrapplingHook
 				mBody.velocity = Vector3.zero;
 				var centerPoint = m_character.GetCenterPoint();
 				m_attacker.transform.position = centerPoint - m_character.transform.forward * (Mod.MountDistance.Value);
-				//m_attacker.transform.position += new Vector3(0, m_character.GetComponent<MeshFilter>().mesh.bounds.extents.y * 3/4);
-				//m_attacker.transform.position += new Vector3(0, m_character.transform.lossyScale.y * 1.5f);				
 
 				// drain stamina
 				m_drainStaminaTimer += dt;
@@ -155,7 +138,6 @@ namespace GrapplingHook
 			{
 				return true;
 			}
-			//if (m_time > 2f && (m_attacker.IsBlocking() || m_attacker.InAttack()))
 			if (m_time > 2f && (m_attacker.IsBlocking()))
 			{
 				m_attacker.Message(MessageHud.MessageType.Center, m_character.m_name + " released");

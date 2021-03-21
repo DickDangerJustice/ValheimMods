@@ -34,7 +34,6 @@ namespace GrapplingHook
             MountDistance = Config.Bind<float>("General", "MountDistance", 1.5f, "Mount Distance");
 
             Recipes = LoadJsonFile<RecipesConfig>("recipes.json");
-            //var assetBundle = LoadAssetBundle("custom_item_grappling_hook");
             var assetBundle = GetAssetBundleFromResources("grapplinghook");
             var grapplingHook = assetBundle.LoadAsset<GameObject>("assets/customitems/grapplinghook/grapplinghook.prefab");
 
@@ -43,31 +42,8 @@ namespace GrapplingHook
             grappled.name = "Grappled";
             StatusEffects.Add(grappled);
             grapplingHookItemDrop.m_itemData.m_shared.m_attackStatusEffect = grappled;
-            //var grappled = assetBundle.LoadAsset<StatusEffect>("assets/customitems/grapplinghook/grappled.asset");
 
-            //grapplingHookItemDrop.m_itemData.m_shared.m_attackStatusEffect = grappled;
             Prefabs.Add("GrapplingHook", grapplingHook);
-            //StatusEffects.Add(grappled);
-
-            //var assetBundle = GetAssetBundleFromResources("custom_item_grappling_hook");
-            //var prefab = assetBundle.LoadAsset<GameObject>("assets/prefabinstance/queensjam.prefab");
-            //Debug.Log("Fixed Item Drop?: " + prefab.GetComponent<ItemDrop>());
-            //Prefabs.Add("GrapplingHook", prefab);
-            //assetBundle.LoadAllAssets();
-            //Debug.Log("Hook asset bundle: " + assetBundle);
-            //if (Recipes != null && assetBundle != null)
-            //{
-            //    foreach (var recipe in Recipes.recipes)
-            //    {
-            //        if (assetBundle.Contains(recipe.item))
-            //        {
-            //            //var prefab = assetBundle.LoadAsset<GameObject>(recipe.item);
-            //            //Debug.Log("Prefab: " + prefab);
-            //            var prefab = assetBundle.LoadAsset<GameObject>($"assets/customitems/grapplinghook/{recipe.item}.prefab");
-            //            Prefabs.Add(recipe.item, prefab);
-            //        }
-            //    }
-            //}
 
             assetBundle?.Unload(false);
 
