@@ -13,13 +13,7 @@ namespace GrapplingHook.Patches
             static void Postfix(Player __instance, ref Attack ___m_currentAttack, ref float ___m_lastCombatTimer, Rigidbody ___m_body, ZSyncAnimation ___m_zanim, CharacterAnimEvent ___m_animEvent, VisEquipment ___m_visEquipment, Attack ___m_previousAttack, float ___m_timeSinceLastAttack, Inventory ___m_inventory)
             {
                 // set configuration variable to allow different key options
-                if (!Enum.TryParse<KeyCode>(Mod.GrapplingHookHotkey.Value, out var grapplingHookHotkey))
-                {
-                    Debug.Log("Grappling hook hotkey not set.");
-                    return;
-                }
-                
-                if (Input.GetKeyDown(grapplingHookHotkey))
+                if (Input.GetKeyDown(Mod.GrapplingHookKeyCode))
                 {
                     var grapplingHook = ___m_inventory.GetAllItems().First(v => v.m_shared.m_name == "$item_grappling_hook");
                     

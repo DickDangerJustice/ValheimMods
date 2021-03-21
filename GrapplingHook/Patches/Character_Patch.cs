@@ -13,11 +13,11 @@ namespace GrapplingHook
     {
         public static void Prefix(Character __instance, bool ___m_groundContact, ref float ___m_maxAirAltitude)
         {
-            if (__instance.IsPlayer() && ___m_groundContact && Mod.WasGrappled)
+            if (__instance.IsPlayer() && ___m_groundContact && Mod.EnableSoftLanding)
             {
                 Debug.Log("Grounded");
                 ___m_maxAirAltitude = __instance.transform.position.y;
-                Mod.WasGrappled = false;
+                Mod.EnableSoftLanding = false;
             }
         }
     }

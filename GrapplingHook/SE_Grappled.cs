@@ -104,10 +104,10 @@ namespace GrapplingHook
 				var mBody = AccessTools.Field(typeof(Character), "m_body").GetValue(m_attacker) as Rigidbody;
 				mBody.velocity = Vector3.zero;
 				var centerPoint = m_character.GetCenterPoint();
-				m_attacker.transform.position = centerPoint - m_character.transform.forward * (Mod.MountDistance.Value);
+				m_attacker.transform.position = centerPoint + m_character.transform.forward * Mod.HorizontalPosition.Value + new Vector3(0, Mod.VerticalPosition.Value);
 
-				// drain stamina
-				m_drainStaminaTimer += dt;
+                // drain stamina
+                m_drainStaminaTimer += dt;
 				if (m_drainStaminaTimer > m_staminaDrainInterval)
 				{
 					m_drainStaminaTimer = 0f;
@@ -115,11 +115,22 @@ namespace GrapplingHook
 					m_attacker.UseStamina(m_staminaDrain * num5);
 				}
 
-				// toggle grappled flag if not active
-				if (!Mod.WasGrappled)
+				// don't allow monster to target mounted player
+				var monsterAI = m_character.GetComponent<MonsterAI>();
+				if (monsterAI != null && monsterAI.GetTargetCreature() == m_attacker)
+				{
+					AccessTools.Field(typeof(MonsterAI), "m_targetCreature").SetValue(monsterAI, null);
+					AccessTools.Field(typeof(MonsterAI), "m_targetStatic").SetValue(monsterAI, null);
+				}
+
+				// make sure target stays alerted
+				m_character.GetBaseAI().Alert();
+
+				// enable soft landing for player on next drop
+				if (!Mod.EnableSoftLanding)
                 {
-					Debug.Log("Target grabbed");
-					Mod.WasGrappled = true;
+					Debug.Log("Soft landing enabled");
+					Mod.EnableSoftLanding = true;
                 }
 			}
 		}
@@ -138,11 +149,12 @@ namespace GrapplingHook
 			{
 				return true;
 			}
-			if (m_time > 2f && (m_attacker.IsBlocking()))
+			if (m_time > 2f && (m_attacker.IsBlocking() || Input.GetKeyDown(Mod.GrapplingHookKeyCode)))
 			{
 				m_attacker.Message(MessageHud.MessageType.Center, m_character.m_name + " released");
 				return true;
 			}
+
 			return false;
 		}
 	}

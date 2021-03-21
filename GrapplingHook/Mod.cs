@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -21,17 +22,38 @@ namespace GrapplingHook
 
         // Config
         public static ConfigEntry<string> GrapplingHookHotkey;
-        public static ConfigEntry<float> MountDistance;
+        public static ConfigEntry<float> HorizontalPosition;
+        public static ConfigEntry<float> VerticalPosition;
 
         // Static vars
-        public static bool WasGrappled;
+        public static bool EnableSoftLanding;
+
+        public static KeyCode GrapplingHookKeyCode;
+        private void HandleGrapplingHookHotkeyChange(object sender, EventArgs e)
+        {
+            UpdateGrapplingHookKeyCode();
+        }
+
+        private void UpdateGrapplingHookKeyCode()
+        {
+            if (!Enum.TryParse<KeyCode>(GrapplingHookHotkey.Value, out var grapplingHookKeyCode))
+            {
+                Debug.Log("Grappling hook hotkey not valid. Value not changed.");
+                return;
+            }
+
+            GrapplingHookKeyCode = grapplingHookKeyCode;
+        }
 
         private void Awake()
         {
             Debug.Log("GRAPPLING HOOK AWAKE");
 
-            GrapplingHookHotkey = Config.Bind<string>("General", "GrapplingHookHotkey", "Z", "Grappling Hook Hotkey");
-            MountDistance = Config.Bind<float>("General", "MountDistance", 1.5f, "Mount Distance");
+            GrapplingHookHotkey = Config.Bind<string>("General", "GrapplingHookHotkey", "G", "Grappling Hook Hotkey");
+            UpdateGrapplingHookKeyCode();
+            GrapplingHookHotkey.SettingChanged += HandleGrapplingHookHotkeyChange;
+            HorizontalPosition = Config.Bind<float>("General", "HorizontalPosition", -1.8f, "Horizontal Position");
+            VerticalPosition = Config.Bind<float>("General", "VerticalPosition", -0.5f, "Vertical Position");
 
             Recipes = LoadJsonFile<RecipesConfig>("recipes.json");
             var assetBundle = GetAssetBundleFromResources("grapplinghook");
