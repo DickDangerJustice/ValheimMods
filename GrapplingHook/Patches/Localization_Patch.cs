@@ -15,6 +15,7 @@ namespace GrapplingHook
         {
             var addWord = AccessTools.Method(typeof(Localization), "AddWord");
             addWord.Invoke(__instance, new object[] { "item_grappling_hook", "Grappling Hook" });
+            addWord.Invoke(__instance, new object[] { "item_grappling_hook_description", "A grappling hook." });
             addWord.Invoke(__instance, new object[] { "se_grappled_name", "Grappled" });
         }
     }

@@ -94,7 +94,6 @@
     <Compile Include="Patches\ZNetScene_Patch.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="custom_item_grappling_hook" />
     <EmbeddedResource Include="grapplinghook" />
     <None Include="packages.config" />
     <None Include="recipes.json">
