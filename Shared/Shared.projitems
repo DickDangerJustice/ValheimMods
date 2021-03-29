@@ -3,14 +3,12 @@
   <PropertyGroup>
     <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <SharedGUID>a3dfa125-756b-42c0-8f5a-aedaf0397f2b</SharedGUID>
+    <SharedGUID>3d6e9597-2562-40c4-9863-d21a49573f3c</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Common</Import_RootNamespace>
+    <Import_RootNamespace>Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AssetBundleHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Consumables.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PrefabCreator.cs" />
   </ItemGroup>
 </Project>
