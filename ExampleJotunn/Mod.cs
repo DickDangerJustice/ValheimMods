@@ -10,6 +10,7 @@ using UnityEngine;
 namespace ExampleJotunn
 {
     [BepInPlugin("dickdangerjustice.ExampleJotunn", "Example Jotunn", "1.0.0")]
+    [BepInDependency(JotunnLib.JotunnLib.ModGuid)]
     public class Mod : BaseUnityPlugin
     {
         private void Awake()
@@ -22,10 +23,17 @@ namespace ExampleJotunn
         {
             var swordBlockBundle = AssetBundleHelper.GetAssetBundleFromResources("swordblock");
             var swordBlock = swordBlockBundle.LoadAsset<GameObject>("Assets/CustomItems/SwordBlock/SwordBlock.prefab");
+            var swordBlockItemDrop = swordBlock.GetComponent<ItemDrop>();
+            swordBlockItemDrop.m_itemData.m_shared.m_damages.Add(new HitData.DamageTypes
+            {
+                m_fire = 20
+            });
 
+            // when this is fixed, the call should be:
+            // PrefabManager.Instance.RegisterPrefab(swordBlock, "SwordBlock");
             AccessTools.Method(typeof(PrefabManager), "RegisterPrefab", new Type[] { typeof(GameObject), typeof(string) }).Invoke(PrefabManager.Instance, new object[] { swordBlock, "SwordBlock" });
 
-            PrefabManager.Instance.RegisterPrefab(new ExampleWood());
+            PrefabManager.Instance.RegisterPrefab(new MagicArmor());
         }
 
         private void InitObjects(object sender, EventArgs e)
@@ -34,7 +42,7 @@ namespace ExampleJotunn
             ObjectManager.Instance.RegisterItem("SwordBlock");
 
             // Add example wood as an item
-            ObjectManager.Instance.RegisterItem("ExampleWood");
+            ObjectManager.Instance.RegisterItem("MagicArmor");
 
             // Add a sample recipe for the example sword
             ObjectManager.Instance.RegisterRecipe(new RecipeConfig()

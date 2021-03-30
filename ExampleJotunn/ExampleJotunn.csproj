@@ -61,7 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mod.cs" />
-    <Compile Include="Prefabs\ExampleWood.cs" />
+    <Compile Include="Prefabs\MagicArmor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
