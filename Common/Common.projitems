@@ -9,7 +9,6 @@
     <Import_RootNamespace>Common</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)AssetBundleHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Consumables.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PrefabCreator.cs" />
   </ItemGroup>

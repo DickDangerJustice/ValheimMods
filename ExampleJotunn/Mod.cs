@@ -41,7 +41,7 @@ namespace ExampleJotunn
             // Add block sword as an item
             ObjectManager.Instance.RegisterItem("SwordBlock");
 
-            // Add example wood as an item
+            // Add magic armor as an item
             ObjectManager.Instance.RegisterItem("MagicArmor");
 
             // Add a sample recipe for the example sword
@@ -66,6 +66,35 @@ namespace ExampleJotunn
                     {
                         // Prefab name of requirement
                         Item = "DeerHide",
+
+                        // Amount required
+                        Amount = 1
+                    }
+                }
+            });
+
+            // Add a sample recipe for the magic armor
+            ObjectManager.Instance.RegisterRecipe(new RecipeConfig()
+            {
+                // Name of the recipe (defaults to "Recipe_YourItem")
+                Name = "Recipe_MagicArmor",
+
+                // Name of the prefab for the crafted item
+                Item = "MagicArmor",
+
+                // Name of the prefab for the crafting station we wish to use
+                // Can set this to null or leave out if you want your recipe to be craftable in your inventory
+                CraftingStation = "piece_workbench",
+
+                RepairStation = "piece_workbench",
+
+                // List of requirements to craft your item
+                Requirements = new PieceRequirementConfig[]
+                {
+                    new PieceRequirementConfig()
+                    {
+                        // Prefab name of requirement
+                        Item = "Wood",
 
                         // Amount required
                         Amount = 1
