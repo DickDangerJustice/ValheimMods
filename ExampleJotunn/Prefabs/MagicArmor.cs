@@ -2,7 +2,7 @@
 using JotunnLib.Entities;
 using UnityEngine;
 
-namespace ExampleJotunn.Prefabs
+namespace ExampleMagicBox.Prefabs
 {
     public class MagicArmor : PrefabConfig
     {

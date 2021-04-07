@@ -1,5 +1,5 @@
 ﻿using BepInEx;
-using ExampleJotunn.Prefabs;
+using ExampleMagicBox.Prefabs;
 using HarmonyLib;
 using JotunnLib.Entities;
 using JotunnLib.Managers;
@@ -7,7 +7,7 @@ using Shared;
 using System;
 using UnityEngine;
 
-namespace ExampleJotunn
+namespace ExampleMagicBox
 {
     [BepInPlugin("dickdangerjustice.ExampleJotunn", "Example Jotunn", "1.0.0")]
     [BepInDependency(JotunnLib.JotunnLib.ModGuid)]
