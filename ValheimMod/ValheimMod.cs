@@ -2,7 +2,7 @@
 using HarmonyLib;
 using UnityEngine;
 
-namespace ValheimMod
+namespace ExampleShowTamed
 {
     [BepInPlugin("dickdangerjustice.ValheimMod", "Valheim Mod", "1.0.0")]
     [BepInProcess("valheim.exe")]
