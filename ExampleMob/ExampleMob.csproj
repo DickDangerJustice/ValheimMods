@@ -34,14 +34,16 @@
     <Reference Include="0Harmony">
       <HintPath>..\Libs\New\0Harmony.dll</HintPath>
     </Reference>
-    <Reference Include="assembly_valheim">
+    <Reference Include="assembly_valheim, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\New\assembly_valheim.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx">
       <HintPath>..\Libs\New\BepInEx.dll</HintPath>
     </Reference>
-    <Reference Include="JotunnLib">
-      <HintPath>..\ExampleJotunn\bin\Debug\JotunnLib.dll</HintPath>
+    <Reference Include="JotunnLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Valheim\BepInEx\plugins\JotunnLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

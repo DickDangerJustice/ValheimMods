@@ -29,9 +29,7 @@ namespace ExampleMagicBox
                 m_fire = 20
             });
 
-            // when this is fixed, the call should be:
-            // PrefabManager.Instance.RegisterPrefab(swordBlock, "SwordBlock");
-            AccessTools.Method(typeof(PrefabManager), "RegisterPrefab", new Type[] { typeof(GameObject), typeof(string) }).Invoke(PrefabManager.Instance, new object[] { swordBlock, "SwordBlock" });
+            PrefabManager.Instance.RegisterPrefab(swordBlock, "SwordBlock");
 
             PrefabManager.Instance.RegisterPrefab(new MagicArmor());
         }

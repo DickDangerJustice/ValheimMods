@@ -26,9 +26,7 @@ namespace ExampleMagicBox
             var magicBox = magicBoxBundle.LoadAsset<GameObject>("Assets/CustomItems/MagicBox/piece_magic_box.prefab");
             // edit additional properties here
 
-            // when this is fixed, the call should be:
-            // PrefabManager.Instance.RegisterPrefab(magicBox, "MagicBox");
-            AccessTools.Method(typeof(PrefabManager), "RegisterPrefab", new Type[] { typeof(GameObject), typeof(string) }).Invoke(PrefabManager.Instance, new object[] { magicBox, "piece_magic_box" });
+            PrefabManager.Instance.RegisterPrefab(magicBox, "MagicBox");
 
             PrefabManager.Instance.RegisterPrefab(new MagicArmor());
         }

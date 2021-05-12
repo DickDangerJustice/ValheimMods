@@ -26,9 +26,7 @@ namespace ExampleMob
             var boar2Bundle = AssetBundleHelper.GetAssetBundleFromResources("boar2");
             var boar2 = boar2Bundle.LoadAsset<GameObject>("Assets/CustomItems/Boar2/Boar2.prefab");
 
-            // when this is fixed, the call should be:
-            // PrefabManager.Instance.RegisterPrefab(swordBlock, "SwordBlock");
-            AccessTools.Method(typeof(PrefabManager), "RegisterPrefab", new Type[] { typeof(GameObject), typeof(string) }).Invoke(PrefabManager.Instance, new object[] { boar2, "Boar2" });
+            PrefabManager.Instance.RegisterPrefab(boar2, "Boar2");
         }
     }
 }
