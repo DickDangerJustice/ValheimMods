@@ -1,7 +1,7 @@
 ﻿using BepInEx;
 using HarmonyLib;
-using JotunnLib;
-using JotunnLib.Managers;
+using Jotunn;
+using Jotunn.Managers;
 using Shared;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ using UnityEngine;
 namespace ExampleMob
 {
     [BepInPlugin("dickdangerjustice.ExampleMob", "Example Mob", "1.0.0")]
-    [BepInDependency(JotunnLib.JotunnLib.ModGuid)]
+    [BepInDependency(Jotunn.Jotunn.ModGuid)]
     public class Mod : BaseUnityPlugin
     {
         private void Awake()
