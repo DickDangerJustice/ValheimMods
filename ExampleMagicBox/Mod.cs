@@ -1,8 +1,8 @@
 ﻿using BepInEx;
 using ExampleMagicBox.Prefabs;
 using HarmonyLib;
-using JotunnLib.Entities;
-using JotunnLib.Managers;
+using Jotunn.Entities;
+using Jotunn.Managers;
 using Shared;
 using System;
 using UnityEngine;
@@ -10,12 +10,12 @@ using UnityEngine;
 namespace ExampleMagicBox
 {
     [BepInPlugin("dickdangerjustice.ExampleMagicBox", "Example Magic Box", "1.0.0")]
-    [BepInDependency(JotunnLib.JotunnLib.ModGuid)]
+    //[BepInDependency(Jotunn.Jotunn.ModGuid)]
     public class Mod : BaseUnityPlugin
     {
         private void Awake()
         {
-            PrefabManager.Instance.PrefabRegister += RegisterPrefabs;
+            PrefabManager.Instance.PrefabManager += RegisterPrefabs;
             PieceManager.Instance.PieceRegister += RegisterPieces;
             ObjectManager.Instance.ObjectRegister += RegisterObjects;
         }

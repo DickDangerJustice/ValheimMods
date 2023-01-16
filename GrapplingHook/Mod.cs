@@ -128,7 +128,7 @@ namespace GrapplingHook
 
         private void OnDestroy()
         {
-            _harmony?.UnpatchAll();
+            _harmony?.UnpatchSelf();
             foreach (var prefab in Prefabs.Values)
             {
                 Destroy(prefab);

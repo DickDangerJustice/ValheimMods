@@ -1,7 +1,7 @@
 ﻿using BepInEx;
 using HarmonyLib;
-using JotunnLib.Entities;
-using JotunnLib.Managers;
+using Jotunn.Entities;
+using Jotunn.Managers;
 using Shared;
 using System;
 using UnityEngine;
@@ -9,7 +9,7 @@ using UnityEngine;
 namespace ExampleTwo
 {
     [BepInPlugin("dickdangerjustice.ExampleTwo", "Example Two", "1.0.0")]
-    [BepInDependency(JotunnLib.JotunnLib.ModGuid)]
+    [BepInDependency(Jotunn.Jotunn.ModGuid)]
     public class Mod : BaseUnityPlugin
     {
         private void Awake()

@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using JotunnLib.Entities;
+using Jotunn.Entities;
 using UnityEngine;
 
 namespace ExampleMagicBox.Prefabs
